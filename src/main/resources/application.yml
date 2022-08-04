@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: brewery-tour
+  datasource:
+    password: 123456
+    url: jdbc:postgresql://localhost:5432/brewery-tour
+    username: dbbrewery
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+    defer-datasource-initialization: true
