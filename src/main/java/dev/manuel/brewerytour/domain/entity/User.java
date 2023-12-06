@@ -40,6 +40,10 @@ public class User implements UserDetails {
   @Enumerated(EnumType.STRING)
   private ERole role;
 
+  @OneToMany
+  @ToString.Exclude
+  private List<Booking> bookingList;
+
   @Override
   public final boolean equals(Object o) {
     if (this == o) return true;
