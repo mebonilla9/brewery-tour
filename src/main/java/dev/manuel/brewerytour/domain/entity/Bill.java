@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
@@ -14,36 +14,29 @@ import java.util.Objects;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "brewery")
-public class Brewery {
+@Table(name = "bill")
+public class Bill {
 
   @Id
   @SequenceGenerator(
-    name = "brewery_id_sequence",
-    sequenceName = "brewery_id_sequence"
+    name = "bill_id_sequence",
+    sequenceName = "bill_id_sequence"
   )
   @GeneratedValue(
     strategy = GenerationType.SEQUENCE,
-    generator = "brewery_id_sequence"
+    generator = "bill_id_sequence"
   )
   private Integer id;
-  private String name;
-  private String location;
-  private String image;
-  private String address;
-  private String phone;
+  private LocalDateTime date;
+  private Double totalPrice;
 
-  @OneToMany
-  @ToString.Exclude
-  private List<Beer> beerList;
+  @ManyToOne
+  @JoinColumn(name = "id_brewery")
+  private Brewery brewery;
 
-  @OneToMany
-  @ToString.Exclude
-  private List<Booking> bookingList;
-
-  @OneToMany
-  @ToString.Exclude
-  private List<Bill> billList;
+  @ManyToOne
+  @JoinColumn(name = "id_user")
+  private User user;
 
   @Override
   public final boolean equals(Object o) {
@@ -52,8 +45,8 @@ public class Brewery {
     Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
     Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
     if (thisEffectiveClass != oEffectiveClass) return false;
-    Brewery brewery = (Brewery) o;
-    return getId() != null && Objects.equals(getId(), brewery.getId());
+    Bill bill = (Bill) o;
+    return getId() != null && Objects.equals(getId(), bill.getId());
   }
 
   @Override

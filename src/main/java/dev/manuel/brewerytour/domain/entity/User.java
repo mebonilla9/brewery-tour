@@ -44,6 +44,10 @@ public class User implements UserDetails {
   @ToString.Exclude
   private List<Booking> bookingList;
 
+  @OneToMany
+  @ToString.Exclude
+  private List<Bill> billList;
+
   @Override
   public final boolean equals(Object o) {
     if (this == o) return true;

@@ -31,7 +31,7 @@ public class Beer {
   private Integer availableQuantity;
 
   @ManyToOne
-  @JoinColumn(name = "brewery_id")
+  @JoinColumn(name = "id_brewery")
   private Brewery brewery;
 
   @Override
