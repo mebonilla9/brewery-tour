@@ -5,8 +5,8 @@ spring:
   application:
     name: brewery-tour
   datasource:
-    url: jdbc:postgresql://localhost:5432/brewery-tour
-    username: brewery-user
+    url: jdbc:postgresql://localhost:5432/brewery_tour
+    username: brewery_user
     password: Xy36Bic92!
     driver-class-name: org.postgresql.Driver
   jpa:
@@ -17,6 +17,7 @@ spring:
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
 
 application:
   security:
