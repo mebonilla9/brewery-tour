@@ -42,11 +42,11 @@ public class User implements UserDetails {
 
   @OneToMany
   @ToString.Exclude
-  private List<Booking> bookingList;
+  private List<Booking> bookings;
 
   @OneToMany
   @ToString.Exclude
-  private List<Bill> billList;
+  private List<Bill> bills;
 
   @Override
   public final boolean equals(Object o) {

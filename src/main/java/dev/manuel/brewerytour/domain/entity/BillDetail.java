@@ -13,24 +13,28 @@ import java.util.Objects;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "bill_details")
-public class BillDetalis {
+@Table(name = "bill_detail")
+public class BillDetail {
 
   @Id
   @SequenceGenerator(
-    name = "bill_details_id_sequence",
-    sequenceName = "bill_details_id_sequence"
+    name = "bill_detail_id_sequence",
+    sequenceName = "bill_detail_id_sequence"
   )
   @GeneratedValue(
     strategy = GenerationType.SEQUENCE,
-    generator = "bill_details_id_sequence"
+    generator = "bill_detail_id_sequence"
   )
   private Integer id;
   private Integer quantity;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "id_bill")
   private Bill bill;
+
+  @OneToOne
+  @JoinColumn(name = "id_beer")
+  private Beer beer;
 
   @Override
   public final boolean equals(Object o) {
@@ -39,7 +43,7 @@ public class BillDetalis {
     Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
     Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
     if (thisEffectiveClass != oEffectiveClass) return false;
-    BillDetalis that = (BillDetalis) o;
+    BillDetail that = (BillDetail) o;
     return getId() != null && Objects.equals(getId(), that.getId());
   }
 

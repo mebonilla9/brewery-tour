@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -37,6 +38,11 @@ public class Bill {
   @ManyToOne
   @JoinColumn(name = "id_user")
   private User user;
+
+  @OneToMany
+  @ToString.Exclude
+  private List<BillDetail> details;
+
 
   @Override
   public final boolean equals(Object o) {

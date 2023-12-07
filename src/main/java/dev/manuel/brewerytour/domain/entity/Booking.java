@@ -16,6 +16,7 @@ import java.util.Objects;
 @Builder
 @Entity
 @Table(name = "booking")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Booking {
   
   @Id

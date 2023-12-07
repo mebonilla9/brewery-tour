@@ -35,15 +35,12 @@ public class Brewery {
 
   @OneToMany
   @ToString.Exclude
-  private List<Beer> beerList;
+  private List<Beer> beers;
 
   @OneToMany
   @ToString.Exclude
-  private List<Booking> bookingList;
+  private List<Booking> bookings;
 
-  @OneToMany
-  @ToString.Exclude
-  private List<Bill> billList;
 
   @Override
   public final boolean equals(Object o) {
