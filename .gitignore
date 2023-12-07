@@ -161,6 +161,9 @@ fabric.properties
 
 .idea/*
 
+# Datasources definition on Intellij
+brewery-tour.iml
+
 !.idea/codeStyles
 !.idea/runConfigurations
 

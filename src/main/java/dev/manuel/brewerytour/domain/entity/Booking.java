@@ -29,7 +29,7 @@ public class Booking {
     generator = "booking_id_sequence"
   )
   private Integer id;
-  private LocalDateTime dateTime;
+  private LocalDateTime date;
   private Integer quantity;
 
   @Enumerated(EnumType.STRING)
