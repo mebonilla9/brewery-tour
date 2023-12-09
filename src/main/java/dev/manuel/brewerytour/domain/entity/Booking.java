@@ -18,7 +18,7 @@ import java.util.Objects;
 @Table(name = "booking")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Booking {
-  
+
   @Id
   @SequenceGenerator(
     name = "booking_id_sequence",
