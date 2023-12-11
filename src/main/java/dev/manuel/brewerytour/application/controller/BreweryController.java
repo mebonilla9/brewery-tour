@@ -29,4 +29,22 @@ public record BreweryController(
     return new ResponseEntity<>(breweries, HttpStatus.FOUND);
   }
 
+  @GetMapping("/{id}")
+  public ResponseEntity<?> findBreweryById(@PathVariable("id") Integer id) throws BreweryTourException {
+    BreweryDto brewery = breweryService.findBreweryById(id);
+    return new ResponseEntity<>(brewery, HttpStatus.FOUND);
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<?> editBrewery(@PathVariable("id") Integer id, @RequestBody BreweryDto breweryDto) throws BreweryTourException {
+    breweryService.editBrewery(id, breweryDto);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<?> removeBrewery(@PathVariable("id") Integer id) throws BreweryTourException {
+    breweryService.removeBrewery(id);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
+
 }
