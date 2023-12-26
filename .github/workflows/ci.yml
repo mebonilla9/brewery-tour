@@ -45,7 +45,7 @@ jobs:
       - name: Login to Fly.io
         uses: superfly/flyctl-actions/setup-flyctl@master
         with:
-          api_key: ${{ secrets.FLY_API_TOKEN }}
+          token: ${{ secrets.FLY_API_TOKEN }}
       - name: Deploy to Fly.io
         run: |
           flyctl deploy --image myapp:${{ github.sha }}
