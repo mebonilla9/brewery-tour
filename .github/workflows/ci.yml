@@ -49,5 +49,5 @@ jobs:
       - name: Deploy to Fly.io
         run: |
           flyctl status
-          flyctl auth login --token=${{ secrets.FLY_API_KEY }}
+          flyctl auth login --access-token=${{ secrets.FLY_API_KEY }}
           flyctl deploy --image myapp:${{ github.sha }}
