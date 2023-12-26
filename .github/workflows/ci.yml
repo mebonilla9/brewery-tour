@@ -15,8 +15,12 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
       - name: Build with Maven
+        env:
+          SPRING_CONFIG_LOCATION: application-test.yml
         run: mvn package --file pom.xml
       - name: Run Unit Tests
+        env:
+          SPRING_CONFIG_LOCATION: application-test.yml
         run: mvn test --file pom.xml
 
   build:
