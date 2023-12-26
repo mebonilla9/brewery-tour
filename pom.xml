@@ -158,6 +158,8 @@
             <DB_URL>jdbc:postgresql://localhost:5432/brewery_tour</DB_URL>
             <DB_USER>brewery_user</DB_USER>
             <DB_PASS>Xy36Bic92!</DB_PASS>
+            <!--suppress UnresolvedMavenProperty -->
+            <SPRING_CONFIG_LOCATION>${env.SPRING_CONFIG_LOCATION}</SPRING_CONFIG_LOCATION>
           </environmentVariables>
         </configuration>
       </plugin>
