@@ -39,16 +39,15 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    env:
+      FLY_API_TOKEN: ${{ secrets.FLY_API_KEY }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Login to Fly.io
         uses: superfly/flyctl-actions/setup-flyctl@master
-        with:
-          token: ${{ secrets.FLY_API_KEY }}
       - name: Deploy to Fly.io
         run: |
-          echo "Github token is ${FLY_API_KEY}"
           flyctl deploy --image brewery-tour-rest-api:$GITHUB_SHA
 
       - name: Verify deployment
