@@ -1,0 +1,43 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - name: Build with Maven
+        run: mvn package --file pom.xml
+      - name: Run Unit Tests
+        run: mvn test --file pom.xml
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Docker Image
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        run: |
+          docker build . --tag myapp:$GITHUB_SHA --build-arg DB_URL=$DB_URL --build-arg DB_USER=$DB_USER --build-arg DB_PASSWORD=$DB_PASSWORD
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+        with:
+          api_key: ${{ secrets.FLY_API_KEY }}
+      - run: flyctl deploy --image myapp:$GITHUB_SHA

@@ -2,6 +2,9 @@ package dev.manuel.brewerytour.application.config;
 
 import dev.manuel.brewerytour.application.lasting.EMessage;
 import dev.manuel.brewerytour.domain.repository.UserRepository;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,6 +45,19 @@ public class ApplicationConfig {
   @Bean
   public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
     return configuration.getAuthenticationManager();
+  }
+
+  @Bean
+  public OpenAPI customOpenAPI() {
+    return new OpenAPI()
+      .components(new Components()
+        .addSecuritySchemes("bearerAuth",
+          new SecurityScheme()
+            .type(SecurityScheme.Type.HTTP)
+            .scheme("bearer")
+            .bearerFormat("JWT")
+        )
+      );
   }
 
 }

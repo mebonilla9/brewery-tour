@@ -6,6 +6,7 @@ import dev.manuel.brewerytour.application.mapper.BeerMapper;
 import dev.manuel.brewerytour.domain.dto.BeerDto;
 import dev.manuel.brewerytour.domain.entity.Beer;
 import dev.manuel.brewerytour.domain.repository.BeerRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,8 +14,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
-public record BeerService(BeerRepository beerRepository, BeerMapper mapper) {
+public record BeerService(
+  BeerRepository beerRepository,
+  BeerMapper mapper) {
 
   public void registerBeer(BeerDto beerDto) {
     Beer beer = mapper.toEntity(beerDto);

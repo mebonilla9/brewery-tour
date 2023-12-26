@@ -5,9 +5,12 @@ spring:
   application:
     name: brewery-tour
   datasource:
-    url: jdbc:postgresql://localhost:5432/brewery_tour
-    username: brewery_user
-    password: Xy36Bic92!
+    # url: jdbc:postgresql://localhost:5432/brewery_tour
+    url: ${DB_URL}
+    # username: brewery_user
+    username: ${DB_USER}
+    # password: Xy36Bic92!
+    password: ${DB_PASS}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -24,3 +27,14 @@ application:
     jwt:
       secret-key: d85193e2bdfe794b7f98a16924adf59d1e05bd7a8b157450fac917d0bf89e38b
       expiration: 86400000 # a day
+
+springdoc:
+  api-docs:
+    path: /docs/api-docs
+    enabled: true
+  swagger-ui:
+    path: /docs/swagger-ui.html
+    operations-sorter: method
+    enabled: true
+  packages-to-scan: dev.manuel.brewerytour.application.controller
+  paths-to-match: /api/**

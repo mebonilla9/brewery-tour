@@ -19,7 +19,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "\"user\"")
+@Table(name = "\"user\"", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
 public class User implements UserDetails {
 
   @Id

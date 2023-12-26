@@ -1,12 +1,13 @@
 package dev.manuel.brewerytour.application.exception;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 
 @Builder
-@RequiredArgsConstructor
-public class ExceptionResponse {
-
-  private final String message;
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public record ExceptionResponse(
+  String message
+) {
 
 }
