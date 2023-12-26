@@ -40,8 +40,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Login to Fly.io
+        uses: superfly/flyctl-actions/login@master
         with:
-          api_key: ${{ secrets.FLY_API_KEY }}
-      - run: flyctl deploy --image myapp:$GITHUB_SHA
+          api_key: ${{ secrets.FLY_API_TOKEN }}
+      - name: Deploy to Fly.io
+        run: |
+          flyctl deploy --image myapp:${{ github.sha }}
