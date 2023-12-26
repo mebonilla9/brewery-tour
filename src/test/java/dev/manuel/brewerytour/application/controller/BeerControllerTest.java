@@ -6,6 +6,7 @@ import dev.manuel.brewerytour.application.exception.BreweryTourExceptionHandler;
 import dev.manuel.brewerytour.application.lasting.EMessage;
 import dev.manuel.brewerytour.application.service.BeerService;
 import dev.manuel.brewerytour.domain.dto.BeerDto;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,6 +118,54 @@ class BeerControllerTest {
 
     // Then
     mockMvc.perform(get("/api/v1/beer/" + offset + "/" + limit))
+      .andExpect(status().isNotFound())
+      .andExpect(result -> assertInstanceOf(BreweryTourException.class, result.getResolvedException()))
+      .andExpect(result -> assertEquals(
+        EMessage.DATA_NOT_FOUND.getMessage(), Objects.requireNonNull(result.getResolvedException()).getMessage()
+      ));
+  }
+
+  @Test
+  @SneakyThrows
+  void testFindBeerById() {
+    // Given
+    final Integer id = 345;
+
+    BeerDto pokerDto = new BeerDto(
+      345,
+      "Poker",
+      3500.0D,
+      30,
+      null
+    );
+
+    // When
+    when(beerService.findBeerById(id)).thenReturn(pokerDto);
+    MockHttpServletResponse response = mockMvc.perform(get("/api/v1/beer/" + id))
+      .andExpect(status().isFound())
+      .andReturn()
+      .getResponse();
+
+    // Then
+    verify(beerService).findBeerById(id);
+    assertThat(response.getContentAsString()).isEqualTo(new ObjectMapper().writeValueAsString(pokerDto));
+  }
+
+  @Test
+  void testFindBeerByIdNotFound() throws Exception {
+    // Given
+    final Integer id = 345;
+
+    // When
+    when(beerService.findBeerById(id)).thenThrow(new BreweryTourException(EMessage.DATA_NOT_FOUND));
+
+    BeerController mockedBeerController = mock(BeerController.class);
+
+    doThrow(new BreweryTourException(EMessage.DATA_NOT_FOUND))
+      .when(mockedBeerController).findBeerById(id);
+
+    // Then
+    mockMvc.perform(get("/api/v1/beer/" + id))
       .andExpect(status().isNotFound())
       .andExpect(result -> assertInstanceOf(BreweryTourException.class, result.getResolvedException()))
       .andExpect(result -> assertEquals(
