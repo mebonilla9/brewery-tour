@@ -51,3 +51,5 @@ jobs:
           flyctl status
           flyctl auth login --access-token=${{ secrets.FLY_API_KEY }}
           flyctl deploy --image myapp:${{ github.sha }}
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_KEY }}
