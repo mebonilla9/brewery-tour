@@ -45,11 +45,11 @@ jobs:
       - name: Login to Fly.io
         uses: superfly/flyctl-actions/setup-flyctl@master
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.FLY_API_KEY }}
       - name: Deploy to Fly.io
         run: |
-          echo "Github token is ${GITHUB_TOKEN}"
-          flyctl deploy --image myapp:${{ github.sha }}
+          echo "Github token is ${FLY_API_KEY}"
+          flyctl deploy --image brewery-tour-rest-api:$GITHUB_SHA
 
       - name: Verify deployment
         run: |
