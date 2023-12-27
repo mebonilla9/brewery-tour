@@ -48,7 +48,7 @@ jobs:
         uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to Fly.io
         run: |
-          flyctl deploy --image brewery-tour-rest-api:$GITHUB_SHA
+          flyctl deploy --image brewery-tour-rest-api:$GITHUB_SHA -a brewery-tour-rest-api
 
       - name: Verify deployment
         run: |
