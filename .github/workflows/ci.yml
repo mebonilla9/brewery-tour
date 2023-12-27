@@ -46,10 +46,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Setup Flyctl
-        uses: superfly/flyctl-actions/setup-flyctl@master
-        with:
-          token: ${{ secrets.FLY_API_KEY }}
+
+      - name: Install Fly.io CLI
+        run: |
+          curl -L https://fly.io/install.sh | sh
+          echo 'export PATH="$HOME/.fly/bin:$PATH"' >> $GITHUB_ENV
+
+      - name: Login to Fly.io
+        run: flyctl auth token ${{ secrets.FLY_API_KEY }}
 
       - name: Deploy to Fly.io
         run: |
