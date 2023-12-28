@@ -47,16 +47,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Fly.io CLI
-        run: |
-          curl -L https://fly.io/install.sh | sh
-          echo "$HOME/.fly/bin" >> $GITHUB_PATH
+      - name: Install flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
 
       - name: Login to Fly.io
         run: |
           flyctl auth token ${{ secrets.FLY_API_TOKEN }}
 
-      - name: Deploy to Fly.io
+      - name: Create Fly app
+        if: ${{ !success() }}
+        run: |
+          flyctl apps create brewery-tour-rest-api
+
+      - name: Initial deploy
+        run: |
+          flyctl deploy --image brewery-tour-rest-api:$GITHUB_SHA -a brewery-tour-rest-api  --strategy native
+
+      - name: Subsequent deploy
         run: |
           flyctl deploy --image brewery-tour-rest-api:$GITHUB_SHA -a brewery-tour-rest-api
 
