@@ -61,7 +61,7 @@ jobs:
 
       - name: Initialize Fly infrastructure
         run: |
-          flyctl machines create main 1 bog --yes
+          flyctl machines create main 1 bog --detach
 
       - name: Initial deploy
         run: |
