@@ -50,4 +50,4 @@ jobs:
       - name: Install flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Login to Fly.io
-        run: flyctl deploy --remote-only
+        run: flyctl deploy -a brewery-tour-rest-api --image brewery-tour-rest-api:$GITHUB_SHA --remote-only
