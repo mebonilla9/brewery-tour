@@ -61,7 +61,7 @@ jobs:
 
       - name: Initialize Fly infrastructure
         run: |
-          flyctl machines create --name main 1 --size shared-cpu-1x --region bog
+          flyctl machines create main 1 bog
 
       - name: Initial deploy
         run: |
