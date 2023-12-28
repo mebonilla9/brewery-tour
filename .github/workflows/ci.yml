@@ -44,8 +44,9 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
-          docker build . -t $USERNAME/brewery-tour-rest-api:$GITHUB_SHA --build-arg DB_URL=$DB_URL --build-arg DB_USER=$DB_USER --build-arg DB_PASSWORD=$DB_PASSWORD
-          docker push $USERNAME/brewery-tour-rest-api:$GITHUB_SHA
+          DOCKER_USER=$USERNAME
+          docker build . -t ${DOCKER_USER}/brewery-tour-rest-api:$GITHUB_SHA --build-arg DB_URL=$DB_URL --build-arg DB_USER=$DB_USER --build-arg DB_PASSWORD=$DB_PASSWORD
+          docker push ${DOCKER_USER}/brewery-tour-rest-api:$GITHUB_SHA
 
   deploy:
     needs: build
