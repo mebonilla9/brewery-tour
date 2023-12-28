@@ -59,6 +59,10 @@ jobs:
         run: |
           flyctl apps create brewery-tour-rest-api
 
+      - name: Initialize Fly infrastructure
+        run: |
+          flyctl machines create --name main 1 --size shared-cpu-1x --region bog
+
       - name: Initial deploy
         run: |
           flyctl deploy --image brewery-tour-rest-api:$GITHUB_SHA -a brewery-tour-rest-api  --strategy native
