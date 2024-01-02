@@ -59,7 +59,15 @@ jobs:
       - name: Install flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy with flyctl
-        run: flyctl deploy --remote-only -a brewery-tour --image docker.io/$USERNAME/brewery-tour:$GITHUB_SHA
+        run: |
+          flyctl deploy --remote-only -a brewery-tour \ 
+          --image docker.io/$USERNAME/brewery-tour:$GITHUB_SHA \
+          --env DB_URL=$DB_URL 
+          --env DB_USER=$DB_USER 
+          --env DB_PASSWORD=$DB_PASSWORD
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
           USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DB_URL: ${{ secrets.DB_URL }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
