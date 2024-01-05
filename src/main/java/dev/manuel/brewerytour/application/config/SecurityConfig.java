@@ -25,7 +25,8 @@ public class SecurityConfig {
     "/api/v1/auth/**",
     "/docs/api-docs/**",
     "/docs/api-docs.yaml",
-    "/docs/swagger-ui/**"
+    "/docs/swagger-ui/**",
+    "/health"
   };
 
   @Bean
