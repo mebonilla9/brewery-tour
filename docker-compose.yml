@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  database:
+    container_name: database
+    image: postgres
+    environment:
+      POSTGRES_USER: brewery_user
+      POSTGRES_PASSWORD: Xy36Bic92!
+      POSTGRES_DB: brewery_tour
+      PGDATA: /data/postgres
+    volumes:
+      - database:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
+  spring:
+    driver: bridge
+
+volumes:
+  database:
