@@ -155,9 +155,12 @@
         <version>3.1.2</version>
         <configuration>
           <environmentVariables>
-            <DB_URL>jdbc:postgresql://localhost:5432/brewery_tour</DB_URL>
-            <DB_USER>brewery_user</DB_USER>
-            <DB_PASS>Xy36Bic92!</DB_PASS>
+            <!--suppress UnresolvedMavenProperty -->
+            <DB_URL>${env.DB_URL}</DB_URL>
+            <!--suppress UnresolvedMavenProperty -->
+            <DB_USER>${env.DB_USER}</DB_USER>
+            <!--suppress UnresolvedMavenProperty -->
+            <DB_PASS>${env.DB_PASS}</DB_PASS>
             <!--suppress UnresolvedMavenProperty -->
             <SPRING_CONFIG_LOCATION>${env.SPRING_CONFIG_LOCATION}</SPRING_CONFIG_LOCATION>
           </environmentVariables>
