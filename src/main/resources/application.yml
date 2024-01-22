@@ -5,9 +5,9 @@ spring:
   application:
     name: brewery-tour
   datasource:
-    url: jdbc:postgresql://brewery-tour-db.cfysua8e2ff0.us-east-1.rds.amazonaws.com/brewery_tour
-    username: postgres
-    password: Test123!
+    url: #url
+    username: #username
+    password: #password
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
