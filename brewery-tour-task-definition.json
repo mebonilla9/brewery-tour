@@ -1,5 +1,5 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:122146189436:task-definition/brewery-tour-task-definition:1",
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:122146189436:task-definition/brewery-tour-task-definition:3",
   "containerDefinitions": [
     {
       "name": "brewery-tour",
@@ -33,10 +33,10 @@
     }
   ],
   "family": "brewery-tour-task-definition",
-  "taskRoleArn": "arn:aws:iam::122146189436:role/ecsTaskExecutionRole",
-  "executionRoleArn": "arn:aws:iam::122146189436:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::122146189436:role/AWSECSTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::122146189436:role/AWSECSTaskExecutionRole",
   "networkMode": "awsvpc",
-  "revision": 1,
+  "revision": 3,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
@@ -82,7 +82,7 @@
     "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2024-01-18T23:39:55.632Z",
+  "registeredAt": "2024-01-22T06:09:16.270Z",
   "registeredBy": "arn:aws:iam::122146189436:root",
   "tags": []
 }
