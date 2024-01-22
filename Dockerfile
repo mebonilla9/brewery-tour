@@ -1,14 +1,6 @@
 # Build Stage
 FROM eclipse-temurin:21-jdk-alpine as build
 
-ARG DB_URL
-ARG DB_USER
-ARG DB_PASS
-
-ENV DB_URL=$DB_URL
-ENV DB_USER=$DB_USER
-ENV DB_PASS=$DB_PASS
-
 WORKDIR /app
 
 # Install Maven
